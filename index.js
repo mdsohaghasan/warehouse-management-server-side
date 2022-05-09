@@ -30,6 +30,22 @@ async function run() {
             res.send(items)
         });
 
+        // PRODUCT (MYITEM) SINGLE LOAD
+        app.get('/MyItems/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const items = await inventoryCollection.findOne(query);
+            res.send(items);
+        });
+
+
+        // PRODUCT (MYITEM) SINGLE POST
+        app.post('/MyItems', async (req, res) => {
+            const newProduct = req.body;
+            const result = await myCollection.insertOne(newProduct);
+            res.send(result)
+        })
+
         // PRODUCT ITEM ALL LOAD 
         app.get('/Items', async (req, res) => {
             const query = {};
@@ -50,12 +66,6 @@ async function run() {
         app.post('/Items', async (req, res) => {
             const newProduct = req.body;
             const result = await inventoryCollection.insertOne(newProduct);
-            res.send(result)
-        })
-        // PRODUCT (MYITEM) SINGLE POST========
-        app.post('/MyItems', async (req, res) => {
-            const newProduct = req.body;
-            const result = await myCollection.insertOne(newProduct);
             res.send(result)
         })
 
