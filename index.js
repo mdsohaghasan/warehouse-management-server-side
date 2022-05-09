@@ -22,6 +22,14 @@ async function run() {
         const myCollection = client.db('warehouse').collection('MyItems');
         console.log('Database Connect Hoise')
 
+        // PRODUCT MYITEM ALL LOAD 
+        app.get('/MyItems', async (req, res) => {
+            const query = {};
+            const cursor = inventoryCollection.find(query);
+            const items = await cursor.toArray();
+            res.send(items)
+        });
+
         // PRODUCT ITEM ALL LOAD 
         app.get('/Items', async (req, res) => {
             const query = {};
