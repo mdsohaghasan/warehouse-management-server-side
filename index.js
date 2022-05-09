@@ -106,7 +106,10 @@ async function run() {
                 $set: {
                     name: updateUser.name,
                     price: updateUser.price,
-                    description: updateUser.description
+                    quantity: updateUser.quantity,
+                    description: updateUser.description,
+                    supplier: updateUser.supplier,
+                    img: updateUser.img
                 }
             };
             const result = await inventoryCollection.updateOne(filter, updateDoc, options);
