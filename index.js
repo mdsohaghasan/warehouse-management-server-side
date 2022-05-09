@@ -31,7 +31,7 @@ async function run() {
         });
 
         // PRODUCT ITEM SINGLE LOAD
-        app.get('/product/:id', async (req, res) => {
+        app.get('/Items/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const items = await inventoryCollection.findOne(query);
@@ -39,14 +39,14 @@ async function run() {
         });
 
         // PRODUCT ITEM SINGLE POST
-        app.post('/product', async (req, res) => {
+        app.post('/Items', async (req, res) => {
             const newProduct = req.body;
             const result = await inventoryCollection.insertOne(newProduct);
             res.send(result)
         })
 
         // PRODUCT ITEM SINGLE UPDATE 
-        app.put('/product/:id', async (req, res) => {
+        app.put('/Items/:id', async (req, res) => {
             const id = req.params.id;
             const updateUser = req.body;
             const filter = { _id: ObjectId(id) };
@@ -63,7 +63,7 @@ async function run() {
         });
 
         // PRODUCT ITEM SINGLE DELETE
-        app.delete('/product/:id', async (req, res) => {
+        app.delete('/Items/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await inventoryCollection.deleteOne(query);
