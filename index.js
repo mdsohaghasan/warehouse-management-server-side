@@ -22,10 +22,10 @@ async function run() {
         const myCollection = client.db('warehouse').collection('MyItems');
         console.log('Database Connect Hoise')
 
-        // PRODUCT MYITEM ALL LOAD 
+        // PRODUCT (MYITEM) ALL LOAD 
         app.get('/MyItems', async (req, res) => {
             const query = {};
-            const cursor = inventoryCollection.find(query);
+            const cursor = myCollection.find(query);
             const items = await cursor.toArray();
             res.send(items)
         });
@@ -50,6 +50,12 @@ async function run() {
         app.post('/Items', async (req, res) => {
             const newProduct = req.body;
             const result = await inventoryCollection.insertOne(newProduct);
+            res.send(result)
+        })
+        // PRODUCT (MYITEM) SINGLE POST========
+        app.post('/MyItems', async (req, res) => {
+            const newProduct = req.body;
+            const result = await myCollection.insertOne(newProduct);
             res.send(result)
         })
 
