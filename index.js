@@ -9,18 +9,11 @@ app.use(cors())
 app.use(express.json())
 
 
-// MONGODB CONNECTION 
+// MONGODB CONNECTION
 
-const uri = "mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.fb0jm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.fb0jm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-//---
-// client.connect(err => {
-//     const collection = client.db("test").collection("devices");
-//     // perform actions on the collection object
-//     client.close();
-// });
-//------------------------
+
 // DATABASE CONNECTION
 async function run() {
     try {
@@ -38,7 +31,7 @@ async function run() {
         });
 
         // PRODUCT ITEM SINGLE LOAD
-        app.get('/Items/:id', async (req, res) => {
+        app.get('/product/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const items = await inventoryCollection.findOne(query);
@@ -46,14 +39,14 @@ async function run() {
         });
 
         // PRODUCT ITEM SINGLE POST
-        app.post('/Items', async (req, res) => {
+        app.post('/product', async (req, res) => {
             const newProduct = req.body;
             const result = await inventoryCollection.insertOne(newProduct);
             res.send(result)
         })
 
         // PRODUCT ITEM SINGLE UPDATE 
-        app.put('/Items/:id', async (req, res) => {
+        app.put('/product/:id', async (req, res) => {
             const id = req.params.id;
             const updateUser = req.body;
             const filter = { _id: ObjectId(id) };
@@ -70,7 +63,7 @@ async function run() {
         });
 
         // PRODUCT ITEM SINGLE DELETE
-        app.delete('/Items/:id', async (req, res) => {
+        app.delete('/product/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await inventoryCollection.deleteOne(query);
@@ -90,7 +83,7 @@ run().catch(console.dir);
 
 // ROOT ENDPOINT 
 app.get('/', (req, res) => {
-    res.send('Hello server ready ache !')
+    res.send(' Hello From Warehouse Server !')
 })
 
 // PORT
