@@ -18,6 +18,9 @@
     "firebase": "^9.7.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.5.0",
-    "nodemon": "^2.0.15"
+    "nodemailer": "^6.7.5",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "nodemon": "^2.0.15",
+    "stripe": "^9.4.0"
   }
 }
